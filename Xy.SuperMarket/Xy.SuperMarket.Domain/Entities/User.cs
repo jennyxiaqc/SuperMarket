@@ -15,6 +15,7 @@ namespace Xy.SuperMarket.Domain.Entities
         public string LastName { get; set; }
         public string UserName { get; set; }
         public string PassWord { get; set; }
+        public Enums.Language Language { get; set; }
         public Enums.PaymentMethod  PaymentMethod { get; set; }
         public string EmailAddress { get; set; }
         public Address HomeAddress { get; set; }

@@ -1,0 +1,18 @@
+﻿@using Xy.SuperMarket.Domain.Entities
+@model IEnumerable<Product>
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<h2>List</h2>
+@foreach (var product in Model)
+{
+    <h3>@product.Name</h3>
+    @product.Catergory
+    @product.Description
+    <h4> @product.Price.ToString("c")</h4>
+    @product.Unit
+
+}
+

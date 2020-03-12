@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Xy.SuperMarket.WebApp.App_Start;
 
 namespace Xy.SuperMarket.WebApp
 {
@@ -13,6 +14,7 @@ namespace Xy.SuperMarket.WebApp
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            IocConfig.ConfigIoc();
         }
     }
 }
