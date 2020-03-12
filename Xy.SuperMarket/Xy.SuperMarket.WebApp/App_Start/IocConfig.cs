@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using Xy.SuperMarket.Domain.Abstract;
 using Xy.SuperMarket.Domain.Concrete;
 
-namespace Xy.SuperMarket.WebApp.App_Start
+namespace Xy.SuperMarket.WebApp
 {
     public class IocConfig
     {
