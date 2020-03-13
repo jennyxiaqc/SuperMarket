@@ -20,8 +20,11 @@ namespace Xy.SuperMarket.WebApp
                 .RegisterControllers(typeof(MvcApplication).Assembly)
                 .PropertiesAutowired();
 
+            //builder
+            //    .RegisterInstance<IProductsRepository>(new InMemoryProductsRepository())
+            //    .PropertiesAutowired();
             builder
-                .RegisterInstance<IProductsRepository>(new InMemoryProductsRepository())
+                .RegisterInstance<IProductsRepository>(new EFProductsRepository())
                 .PropertiesAutowired();
 
 
