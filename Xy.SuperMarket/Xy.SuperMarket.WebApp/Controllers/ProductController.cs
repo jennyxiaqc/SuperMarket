@@ -37,11 +37,8 @@ namespace Xy.SuperMarket.WebApp.Controllers
                     TotalItems= ProductsRepository.Products.Where(p=>category==null||p.Catergory==category).Count()
                 },
                 CurrentCategory = category
-
-        };
+            };
             return View(model);
         }
-
-
     }
 }

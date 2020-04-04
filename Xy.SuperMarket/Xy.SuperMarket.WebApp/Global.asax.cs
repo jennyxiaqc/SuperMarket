@@ -4,7 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-
+using Xy.SuperMarket.Domain.Entities;
+using Xy.SuperMarket.WebApp.Infrastructure.Binders;
 
 namespace Xy.SuperMarket.WebApp
 {
@@ -15,6 +16,7 @@ namespace Xy.SuperMarket.WebApp
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             IocConfig.ConfigIoc();
+            ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
         }
     }
 }
