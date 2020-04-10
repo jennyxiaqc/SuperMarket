@@ -39,5 +39,18 @@ namespace Xy.SuperMarket.Domain.Concrete
             }
             context.SaveChanges();
         }
+
+        public Product DeleteProduct(int productId)
+        {
+            Product dbEntry = context.Products.Find(productId);
+
+            if (dbEntry!=null)
+            { 
+                context.Products.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+
+        }
     }
 }

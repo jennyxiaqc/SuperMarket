@@ -20,6 +20,11 @@ namespace Xy.SuperMarket.Domain.Concrete
         public IEnumerable<Product> Products 
         { get { return _products; } }
 
+        public Product DeleteProduct(int productId)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SaveProduct(Product product)
         {
             throw new NotImplementedException();

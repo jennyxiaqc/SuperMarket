@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Xy.SuperMarket.Domain.Abstract;
+using Xy.SuperMarket.Domain.Entities;
 
 namespace Xy.SuperMarket.WebApp.Controllers
 {
@@ -26,6 +27,39 @@ namespace Xy.SuperMarket.WebApp.Controllers
                 .Where(x => x.ProductId == productId)
                 .FirstOrDefault();
             return View(result);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                repository.SaveProduct(product);
+                TempData["message"] = string.Format("{0} has been saved!",product.Name);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                //There is something wrong with the input
+                return View(product);
+            }
+        }
+
+        public ActionResult Create()
+        {
+            return View("Edit", new Product());
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int productId=0)
+        {
+            var deletedProduct = repository.DeleteProduct(productId);
+            if (deletedProduct!=null)
+            {
+                TempData["message"] = string.Format("{0} product is deleted!",
+                    deletedProduct.Name);
+            }
+            return RedirectToAction("Index");
         }
     }
 }
