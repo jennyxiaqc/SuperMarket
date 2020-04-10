@@ -16,5 +16,28 @@ namespace Xy.SuperMarket.Domain.Concrete
         {
             get { return context.Products; }
         }
+
+        public void SaveProduct(Product product)
+        {
+            if (product.ProductId==0)
+            {
+                context.Products.Add(product);
+            }
+            else
+            {
+                Product dbEntry = context.Products
+                    .Where(x => x.ProductId == product.ProductId)
+                    .FirstOrDefault();
+                if (dbEntry!=null)
+                {
+                    dbEntry.Name = product.Name;
+                    dbEntry.Catergory = product.Catergory;
+                    dbEntry.Description = product.Description;
+                    dbEntry.Unit = product.Unit;
+                    dbEntry.Price = product.Price;
+                }
+            }
+            context.SaveChanges();
+        }
     }
 }

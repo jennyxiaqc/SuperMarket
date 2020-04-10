@@ -23,8 +23,7 @@ namespace Xy.SuperMarket.WebApp.Controllers
                 .Select(x => x.Catergory)
                 .Distinct()
                 .OrderBy(x => x);
-                
-            return PartialView(categories);
+            return PartialView("FlexMenu",categories);
         }
     }
 }
