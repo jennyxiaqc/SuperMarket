@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Xy.SuperMarket.Domain.Abstract;
 using Xy.SuperMarket.Domain.Concrete;
+using Xy.SuperMarket.Domain.Entities;
 using Xy.SuperMarket.WebApp.Models;
 
 namespace Xy.SuperMarket.WebApp.Controllers
@@ -39,6 +40,22 @@ namespace Xy.SuperMarket.WebApp.Controllers
                 CurrentCategory = category
             };
             return View(model);
+        }
+
+        public FileContentResult GetImage(int productId = 0)
+        {
+            Product product = ProductsRepository.Products
+                .Where(x => x.ProductId == productId)
+                .FirstOrDefault();
+            if (product != null)
+            {
+                return File(product.ImageData, product.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
+
         }
     }
 }

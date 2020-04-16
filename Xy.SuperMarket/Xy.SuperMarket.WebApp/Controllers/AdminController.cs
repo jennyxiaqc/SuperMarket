@@ -69,20 +69,6 @@ namespace Xy.SuperMarket.WebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        public FileContentResult GetImage(int productId=0)
-        {
-            Product product = repository.Products
-                .Where(x => x.ProductId == productId)
-                .FirstOrDefault();
-            if (product!=null)
-            {
-                return File(product.ImageData, product.ImageMimeType);
-            }
-            else
-            {
-                return null;
-            }
-
-        }
+        
     }
 }
