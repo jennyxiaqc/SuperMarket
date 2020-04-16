@@ -3,21 +3,23 @@
         <h2>
             @Model.Name
         </h2>
-        <div class="ui-grid-b">
-            <div class="ui-block-a">
-                @Model.Description
-            </div>
-            <div class="ui-block-b">
-                <strong>@Model.Price.ToString("c")</strong>
-            </div>
-            <div>@Model.Unit</div>
-            <div class="ui-block-c">
-                @using (Html.BeginForm("AddToCart", "Cart"))
-                {
-                     @Html.HiddenFor(x => x.ProductId)
-                     @Html.Hidden("ReturnUrl", Request.Url.PathAndQuery)
-                     <input type="submit" data-inline="true" data-mini="true" value="Add to cart" />
-                }
-            </div>
-        </div>
+		<div class="ui-grid-b">
+			<img class="img-thumbnail" width="50" height="50"
+				 src="@Url.Action("GetImage", "Product",new { Model.ProductId })" />
+			<div class="ui-block-a">
+				@Model.Description
+			</div>
+			<div class="ui-block-b">
+				<strong>@Model.Price.ToString("c")</strong>
+			</div>
+			<div>@Model.Unit</div>
+			<div class="ui-block-c">
+				@using (Html.BeginForm("AddToCart", "Cart"))
+				{
+					@Html.HiddenFor(x => x.ProductId)
+					@Html.Hidden("ReturnUrl", Request.Url.PathAndQuery)
+					<input type="submit" data-inline="true" data-mini="true" value="Add to cart" />
+				}
+			</div>
+		</div>
     </div>
