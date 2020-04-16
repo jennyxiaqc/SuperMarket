@@ -7,13 +7,13 @@ namespace Xy.SuperMarket.Domain.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class ProductR1 : IMigrationMetadata
+    public sealed partial class init : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ProductR1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(init));
         
         string IMigrationMetadata.Id
         {
-            get { return "202004101904578_ProductR1"; }
+            get { return "202004160352484_init"; }
         }
         
         string IMigrationMetadata.Source

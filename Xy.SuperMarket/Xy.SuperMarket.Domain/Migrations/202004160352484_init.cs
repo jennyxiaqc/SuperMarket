@@ -3,20 +3,32 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.AdminUsers",
+                c => new
+                    {
+                        AdminUserId = c.Int(nullable: false, identity: true),
+                        UserName = c.String(nullable: false),
+                        Password = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.AdminUserId);
+            
             CreateTable(
                 "dbo.Products",
                 c => new
                     {
                         ProductId = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        Name = c.String(nullable: false),
                         Description = c.String(),
-                        Catergory = c.String(),
+                        Catergory = c.String(nullable: false),
                         Price = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Unit = c.String(),
+                        Unit = c.String(nullable: false),
+                        ImageData = c.Binary(),
+                        ImageMimeType = c.String(),
                     })
                 .PrimaryKey(t => t.ProductId);
             
@@ -56,6 +68,7 @@
         {
             DropTable("dbo.Users");
             DropTable("dbo.Products");
+            DropTable("dbo.AdminUsers");
         }
     }
 }

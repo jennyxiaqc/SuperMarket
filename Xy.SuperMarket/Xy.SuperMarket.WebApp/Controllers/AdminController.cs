@@ -8,6 +8,7 @@ using Xy.SuperMarket.Domain.Entities;
 
 namespace Xy.SuperMarket.WebApp.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
        private IProductsRepository repository;
@@ -30,10 +31,16 @@ namespace Xy.SuperMarket.WebApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(Product product, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
+                if (image!=null)
+                {
+                    product.ImageMimeType = image.ContentType;
+                    product.ImageData = new byte[image.ContentLength];
+                    image.InputStream.Read(product.ImageData, 0, image.ContentLength);
+                }
                 repository.SaveProduct(product);
                 TempData["message"] = string.Format("{0} has been saved!",product.Name);
                 return RedirectToAction("Index");
@@ -60,6 +67,22 @@ namespace Xy.SuperMarket.WebApp.Controllers
                     deletedProduct.Name);
             }
             return RedirectToAction("Index");
+        }
+
+        public FileContentResult GetImage(int productId=0)
+        {
+            Product product = repository.Products
+                .Where(x => x.ProductId == productId)
+                .FirstOrDefault();
+            if (product!=null)
+            {
+                return File(product.ImageData, product.ImageMimeType);
+            }
+            else
+            {
+                return null;
+            }
+
         }
     }
 }

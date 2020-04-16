@@ -10,7 +10,6 @@
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Xy.SuperMarket.Domain.Concrete.EFDbContext";
         }
 
         protected override void Seed(Xy.SuperMarket.Domain.Concrete.EFDbContext context)

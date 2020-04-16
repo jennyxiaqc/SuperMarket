@@ -81,19 +81,16 @@
     <Compile Include="Concrete\EmailOrderProcessor.cs" />
     <Compile Include="Concrete\InMemoryProductsRepository.cs" />
     <Compile Include="Entities\Address.cs" />
+    <Compile Include="Entities\AdminUser.cs" />
     <Compile Include="Entities\Cart.cs" />
     <Compile Include="Entities\Category.cs" />
     <Compile Include="Entities\Enums.cs" />
     <Compile Include="Entities\Product.cs" />
     <Compile Include="Entities\ShippingDetails.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Migrations\202003140159274_InitialCreate.cs" />
-    <Compile Include="Migrations\202003140159274_InitialCreate.designer.cs">
-      <DependentUpon>202003140159274_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202004101904578_ProductR1.cs" />
-    <Compile Include="Migrations\202004101904578_ProductR1.designer.cs">
-      <DependentUpon>202004101904578_ProductR1.cs</DependentUpon>
+    <Compile Include="Migrations\202004160352484_init.cs" />
+    <Compile Include="Migrations\202004160352484_init.designer.cs">
+      <DependentUpon>202004160352484_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,11 +100,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003140159274_InitialCreate.resx">
-      <DependentUpon>202003140159274_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202004101904578_ProductR1.resx">
-      <DependentUpon>202004101904578_ProductR1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004160352484_init.resx">
+      <DependentUpon>202004160352484_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

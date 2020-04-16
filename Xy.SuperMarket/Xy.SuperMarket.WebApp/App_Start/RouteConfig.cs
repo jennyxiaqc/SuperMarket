@@ -40,6 +40,8 @@ namespace Xy.SuperMarket.WebApp
                 null,
                 "{controller}/{action}");
 
+
+
             //routes.MapRoute(
             //    name: "Default",
             //    url: "{controller}/{action}/{id}",

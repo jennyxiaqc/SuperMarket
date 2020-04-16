@@ -35,6 +35,11 @@ namespace Xy.SuperMarket.Domain.Concrete
                     dbEntry.Description = product.Description;
                     dbEntry.Unit = product.Unit;
                     dbEntry.Price = product.Price;
+                    if (product.ImageData!=null && product.ImageMimeType!=null)
+                    {
+                        dbEntry.ImageData = product.ImageData;
+                        dbEntry.ImageMimeType = product.ImageMimeType;
+                    }
                 }
             }
             context.SaveChanges();

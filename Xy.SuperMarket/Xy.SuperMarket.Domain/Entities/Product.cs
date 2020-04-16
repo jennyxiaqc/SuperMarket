@@ -28,5 +28,9 @@ namespace Xy.SuperMarket.Domain.Entities
 
         [Required(ErrorMessage ="Please enter a unit")]
         public string Unit { get; set; }
+
+        public byte[] ImageData { get; set; }
+
+        public string ImageMimeType { get; set; }
     }
 }
