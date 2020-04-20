@@ -47,7 +47,7 @@ namespace Xy.SuperMarket.WebApp.Controllers
             Product product = ProductsRepository.Products
                 .Where(x => x.ProductId == productId)
                 .FirstOrDefault();
-            if (product != null)
+            if (product != null && product.ImageData!=null && product.ImageMimeType!=null)
             {
                 return File(product.ImageData, product.ImageMimeType);
             }
