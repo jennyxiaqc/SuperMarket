@@ -1,4 +1,5 @@
-﻿	const fileInput = document.querySelector('input[type="file"]');
+﻿function previewfile() {
+	const fileInput = document.querySelector('input[type="file"]');
 	const preview = document.querySelector('#WithImg');
 	const previewNoImg = document.querySelector('#NoImg');
 	const reader = new FileReader();
@@ -8,24 +9,16 @@
 			if (preview != null) {
 				preview.src = reader.result;
 			}
-			else
-			{
+			else {
 				previewNoImg.src = reader.result;
 				previewNoImg.style.display = 'block';
 			}
 		}
 	}
-
-	function addListeners(reader) {
+	const selectedFile = fileInput.files[0];
+	$("#upload-file-info").html($("#input").val());
+	if (selectedFile) {
 		reader.addEventListener('load', handleEvent);
+		reader.readAsDataURL(selectedFile);
 	}
-
-	function handleSelected(e) {
-		const selectedFile = fileInput.files[0];
-		if (selectedFile) {
-		addListeners(reader);
-			reader.readAsDataURL(selectedFile);
-		}
-	}
-
-	fileInput.addEventListener('change', handleSelected);
+}
