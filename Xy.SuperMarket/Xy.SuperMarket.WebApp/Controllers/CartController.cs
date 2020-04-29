@@ -1,10 +1,12 @@
-﻿using System;
+﻿using PayPal.Api;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Xy.SuperMarket.Domain.Abstract;
 using Xy.SuperMarket.Domain.Entities;
+using Xy.SuperMarket.WebApp.Concrete;
 using Xy.SuperMarket.WebApp.Models;
 
 namespace Xy.SuperMarket.WebApp.Controllers
@@ -12,14 +14,15 @@ namespace Xy.SuperMarket.WebApp.Controllers
     public class CartController : Controller
     {
         private IProductsRepository productRepository;
-        private IOrderProcessor orderProcessor;
-        public CartController(IProductsRepository repo, IOrderProcessor processor)
+        // private IOrderProcessor orderProcessor;
+        //   public CartController(IProductsRepository repo, IOrderProcessor processor)
+        public CartController(IProductsRepository repo)
         {
             productRepository = repo;
-            orderProcessor = processor;
+          //  orderProcessor = processor;
         }
 
-        public RedirectToRouteResult AddToCart(Cart cart, int productId, string returnUrl)
+         public RedirectToRouteResult AddToCart(Cart cart, int productId, string returnUrl)
         {
             Product product = productRepository.Products
                 .Where(p => p.ProductId == productId)
@@ -29,6 +32,8 @@ namespace Xy.SuperMarket.WebApp.Controllers
                 cart.AddItem(product, 1);
             }
             return RedirectToAction("Index", new { returnUrl });
+            //return RedirectToAction("List","Product", new { returnUrl });
+            
         }
 
         public RedirectToRouteResult RemoveFromCart(Cart cart, int productId, string returnUrl)
@@ -64,7 +69,7 @@ namespace Xy.SuperMarket.WebApp.Controllers
         }
 
         [HttpPost]
-        public ViewResult Checkout(Cart cart, ShippingDetails shippingDetails)
+        public RedirectToRouteResult Checkout(Cart cart, ShippingDetails shippingDetails)
         {
             if (cart.Lines.Count() == 0)
             {
@@ -72,14 +77,21 @@ namespace Xy.SuperMarket.WebApp.Controllers
             }
             if (ModelState.IsValid)
             {
-                orderProcessor.ProcessOrder(cart, shippingDetails);
-                cart.clear();
-                return View("Completed");
+                Session["cart"] = cart;
+                Session["shippingDetails"] = shippingDetails;
+                return RedirectToAction("PaymentWithPaypal", "PaypalPayment");
+
+                //orderProcessor.ProcessOrder(cart, shippingDetails);
+                //cart.clear();
+                //return View("Completed");
             }
             else
             {
-                return View(shippingDetails);
+                return RedirectToAction("Checkout",shippingDetails);
             }
         }
-    }
+
+		//*********
+		
+	}
 }

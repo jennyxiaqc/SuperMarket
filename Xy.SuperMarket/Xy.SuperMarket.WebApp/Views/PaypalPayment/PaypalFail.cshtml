@@ -1,0 +1,12 @@
+﻿
+@{
+	ViewBag.Title = "Payment with Paypal";
+}
+@{ string ex = "";
+	if (Session["ex"] != null)
+	{
+		ex = Session["ex"].ToString();
+	}
+}
+<h2>Payment with paypal failed!</h2>
+<h3>@ex</h3>
