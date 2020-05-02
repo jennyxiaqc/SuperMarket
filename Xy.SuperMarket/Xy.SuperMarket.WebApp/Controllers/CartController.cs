@@ -67,13 +67,21 @@ namespace Xy.SuperMarket.WebApp.Controllers
             return PartialView(cart);
         }
 
-        public ViewResult Checkout()
+        //public ViewResult Checkout(ShippingDetails shippingDetails=null)
+        //{
+        //    if (shippingDetails == null)
+        //        shippingDetails = new ShippingDetails();
+        //    return View(shippingDetails);
+        //}
+       public ViewResult Checkout()
         {
-            return View(new ShippingDetails());
+            
+            return View(new ShippingDetails()); //or return view();
         }
 
+
         [HttpPost]
-        public RedirectToRouteResult Checkout(Cart cart, ShippingDetails shippingDetails)
+        public ActionResult Checkout(Cart cart, ShippingDetails shippingDetails)
         {
             if (cart.Lines.Count() == 0)
             {
@@ -91,7 +99,7 @@ namespace Xy.SuperMarket.WebApp.Controllers
             }
             else
             {
-                return RedirectToAction("Checkout",shippingDetails);
+                return View(shippingDetails);
             }
         }
 
