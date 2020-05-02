@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Mvc;
 using Xy.SuperMarket.Domain.Abstract;
@@ -22,7 +23,8 @@ namespace Xy.SuperMarket.WebApp.Controllers
           //  orderProcessor = processor;
         }
 
-         public RedirectToRouteResult AddToCart(Cart cart, int productId, string returnUrl)
+        // public RedirectToRouteResult AddToCart(Cart cart, int productId, string returnUrl)
+        public ActionResult AddToCart(Cart cart, int productId, string returnUrl)
         {
             Product product = productRepository.Products
                 .Where(p => p.ProductId == productId)
@@ -31,9 +33,11 @@ namespace Xy.SuperMarket.WebApp.Controllers
             {
                 cart.AddItem(product, 1);
             }
-            return RedirectToAction("Index", new { returnUrl });
-            //return RedirectToAction("List","Product", new { returnUrl });
-            
+            //return RedirectToAction("Index", new { returnUrl });
+            //return Redirect(Request.Url.Scheme + "://" + Request.Url.Authority + returnUrl);
+            return Redirect(returnUrl);
+            //return View();
+
         }
 
         public RedirectToRouteResult RemoveFromCart(Cart cart, int productId, string returnUrl)

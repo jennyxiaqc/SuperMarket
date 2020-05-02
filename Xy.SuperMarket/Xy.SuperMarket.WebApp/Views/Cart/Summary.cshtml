@@ -1,13 +1,20 @@
 ﻿@model Xy.SuperMarket.Domain.Entities.Cart
-
+@{
+	var returnUrl = Request.Url.PathAndQuery;
+	int lastUrl = returnUrl.LastIndexOf("returnUrl", returnUrl.Length-1);
+	if (lastUrl >= 0)
+	{
+		returnUrl = returnUrl.Substring(lastUrl+("returnUrl=".Length)).Replace("%2F","/").Replace("%25","%");
+	}
+}
 <div class="navbar-right hidden-xs">
 	@Html.ActionLink("Shopping Cart", "Index", "Cart",
-		new { returnUrl = Request.Url.PathAndQuery },
+		new { returnUrl = @returnUrl},
 		new { @class = "btn btn-default navbar-btn" })
 </div>
 <div class="navbar-right visible-xs">
 	<a href=@Url.Action("Index", "Cart",
-        new { returnUrl = Request.Url.PathAndQuery })
+        new { returnUrl = @returnUrl})
 	   class="btn btn-default navbar-btn">
 		<span class="glyphicon glyphicon-shopping-cart"></span>
 	</a>
@@ -18,4 +25,5 @@
 	@Model.Lines.Sum(x => x.Quantity) items,
 	@Model.ComputeTotalValue().ToString("c")
 </div>
+
 
